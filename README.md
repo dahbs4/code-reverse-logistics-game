@@ -56,6 +56,29 @@ Transport, regular labor, overtime, dwell/storage, and equipment investment are 
 
 ## Tests and agent
 
+### Simulated players
+
+Four deterministic players can run full games without opening the browser:
+`hands_off` keeps the default plan, `baseline` uses the original controller,
+`cost_conscious` avoids overtime and investment, and `adaptive_throughput`
+reallocates workers and responds to queue pressure with overtime and faster freight.
+These are rule-based simulations, not live multiplayer opponents or trained models.
+
+```bash
+# Compare all four players across all scenarios and two matching seeds:
+.venv/bin/python -m scripts.simulate_players
+# One player, one scenario, and optional daily action traces:
+.venv/bin/python -m scripts.simulate_players --players adaptive_throughput --scenarios crisis --seeds 42 --trace-dir /tmp/player-traces
+# Include the harder demand setting:
+.venv/bin/python -m scripts.simulate_players --difficulties standard hard
+```
+
+The runner checks freight conservation and hourly engine invariants and writes
+[a comparison report](docs/player-simulation-report.md) plus
+[individual episode results](docs/player-simulation-results.json).
+Each player gets an independent game with the same scenario, difficulty, and seed.
+Results are reproducible examples rather than a guarantee that a strategy will win.
+
 From the repository root:
 
 ```bash
