@@ -1,0 +1,90 @@
+[
+  {
+    "scenario": "stable",
+    "seed": 42,
+    "hour": 672,
+    "processed": 2889441,
+    "generated": 4595477,
+    "inventory": 3562584,
+    "cost": 7792956.130400002,
+    "score": 73.0,
+    "outcome": "won"
+  },
+  {
+    "scenario": "stable",
+    "seed": 137,
+    "hour": 672,
+    "processed": 3012690,
+    "generated": 4707095,
+    "inventory": 3550953,
+    "cost": 7771174.256800001,
+    "score": 71.6,
+    "outcome": "won"
+  },
+  {
+    "scenario": "crisis",
+    "seed": 42,
+    "hour": 672,
+    "processed": 2568870,
+    "generated": 4601315,
+    "inventory": 3888993,
+    "cost": 5167252.993600007,
+    "score": 64.5,
+    "outcome": "won"
+  },
+  {
+    "scenario": "crisis",
+    "seed": 137,
+    "hour": 672,
+    "processed": 2750722,
+    "generated": 4648453,
+    "inventory": 3754279,
+    "cost": 5359335.082400008,
+    "score": 66.4,
+    "outcome": "won"
+  },
+  {
+    "scenario": "peak",
+    "seed": 42,
+    "hour": 648,
+    "processed": 2348027,
+    "generated": 14204616,
+    "inventory": 13713137,
+    "cost": 8702865.575199999,
+    "score": 61.1,
+    "outcome": "lost"
+  },
+  {
+    "scenario": "peak",
+    "seed": 137,
+    "hour": 648,
+    "processed": 2289941,
+    "generated": 13656996,
+    "inventory": 13223603,
+    "cost": 8569703.215200003,
+    "score": 61.9,
+    "outcome": "lost"
+  },
+  {
+    "scenario": "breakdown",
+    "seed": 42,
+    "hour": 672,
+    "processed": 2929710,
+    "generated": 4664220,
+    "inventory": 3591058,
+    "cost": 8272490.341599999,
+    "score": 67.4,
+    "outcome": "won"
+  },
+  {
+    "scenario": "breakdown",
+    "seed": 137,
+    "hour": 672,
+    "processed": 2959972,
+    "generated": 4647102,
+    "inventory": 3543678,
+    "cost": 8085761.137599999,
+    "score": 67.3,
+    "outcome": "won"
+  }
+]
