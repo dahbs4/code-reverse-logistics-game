@@ -8,8 +8,9 @@ from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from sqlalchemy import create_engine, String, Text
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, sessionmaker
-from simulation.models import Action, NewGame, StepRequest, Observation
-from simulation.engine import new_game, observe, apply_action, advance, preview, SCENARIOS
+from simulation.models import WeeklyPlan, NewGame, StepRequest, Observation
+from simulation.engine import new_game, observe, SCENARIOS
+from simulation.weekly import outlook, commit as commit_weekly, advance_week
 
 class Base(DeclarativeBase): pass
 class Game(Base):
@@ -59,18 +60,18 @@ def get(id:str):
         game=read_game(db,id);return result(game,json.loads(game.state))
 
 @app.post('/api/games/{id}/preview')
-def planning(id:str,action:Action):
+def planning(id:str,action:WeeklyPlan):
     with Session() as db:
         game=read_game(db,id)
-        try:return preview(json.loads(game.state),action.model_dump())
+        try:return outlook(json.loads(game.state),action.model_dump())
         except ValueError as e:raise HTTPException(422,str(e))
 
 @app.post('/api/games/{id}/action',response_model=Observation)
-def commit(id:str,action:Action):
+def commit(id:str,action:WeeklyPlan):
     with lock,Session.begin() as db:
         game=read_game(db,id);s=json.loads(game.state)
         if observe(s)['terminal']['done']:raise HTTPException(409,'Scenario complete; create a new game to continue')
-        try:apply_action(s,action.model_dump())
+        try:commit_weekly(s,action.model_dump())
         except ValueError as e:raise HTTPException(422,str(e))
         game.state=json.dumps(s);game.updated=datetime.now(timezone.utc).isoformat()
         return result(game,s)
@@ -80,8 +81,10 @@ def step(id:str,req:StepRequest):
     with lock,Session.begin() as db:
         game=read_game(db,id);s=json.loads(game.state)
         try:
-            if req.action:apply_action(s,req.action.model_dump())
-            advance(s,req.hours)
+            if req.action and observe(s)['terminal']['done']:
+                raise HTTPException(409,'Campaign complete; create a new game to continue')
+            if req.action:commit_weekly(s,req.action.model_dump())
+            advance_week(s)
         except ValueError as e:raise HTTPException(422,str(e))
         game.state=json.dumps(s);game.updated=datetime.now(timezone.utc).isoformat()
         return result(game,s)

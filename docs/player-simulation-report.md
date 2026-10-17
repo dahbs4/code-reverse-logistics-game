@@ -1,35 +1,33 @@
-> Historical reference: this document describes the previous 28-day game. Current new campaigns last 52 weeks and enforce physical site throughput limits.
-
 # Simulated player tournament
 
-Deterministic rule-based players use the same actions and engine as human players. Each turn advances up to 24 hours; engine invariants run every simulated hour. These seeded episodes compare strategies; they do not establish optimal play.
+Deterministic rule-based players use the same actions and engine as human players. Each turn executes one weekly unit plan; conservation is checked after each week. These seeded episodes compare strategies; they do not establish optimal play.
 
 Episodes: 32. All terminal states reached; freight conservation balance is zero in every episode.
 
 | Player | Scenario | Difficulty | Runs | Wins | Mean score | Score range | Mean hours | Mean processed | Mean cost |
 | --- | --- | --- | ---: | ---: | ---: | --- | ---: | ---: | ---: |
-| baseline | stable | standard | 2 | 2 | 72.3 | 71.6–73.0 | 672 | 2,951,066 | 7,782,065.20 |
-| baseline | crisis | standard | 2 | 2 | 65.5 | 64.5–66.4 | 672 | 2,659,796 | 5,263,294.04 |
-| baseline | peak | standard | 2 | 0 | 61.5 | 61.1–61.9 | 648 | 2,318,984 | 8,636,284.40 |
-| baseline | breakdown | standard | 2 | 2 | 67.3 | 67.3–67.4 | 672 | 2,944,841 | 8,179,125.74 |
-| hands_off | stable | standard | 2 | 2 | 73.3 | 71.9–74.7 | 672 | 3,156,663 | 5,193,140.04 |
-| hands_off | crisis | standard | 2 | 1 | 60.0 | 59.9–60.1 | 672 | 2,267,582 | 4,201,753.83 |
-| hands_off | peak | standard | 2 | 0 | 61.6 | 61.3–61.9 | 648 | 3,077,646 | 6,854,423.98 |
-| hands_off | breakdown | standard | 2 | 2 | 70.2 | 68.4–71.9 | 672 | 2,238,832 | 5,446,176.49 |
-| cost_conscious | stable | standard | 2 | 2 | 70.4 | 68.3–72.5 | 672 | 3,128,734 | 5,351,620.04 |
-| cost_conscious | crisis | standard | 2 | 0 | 59.5 | 59.4–59.6 | 672 | 2,602,020 | 4,572,928.46 |
-| cost_conscious | peak | standard | 2 | 0 | 59.2 | 59.1–59.2 | 648 | 2,826,164 | 7,242,088.89 |
-| cost_conscious | breakdown | standard | 2 | 2 | 65.6 | 65.6–65.6 | 672 | 2,381,080 | 5,262,513.04 |
-| adaptive_throughput | stable | standard | 2 | 2 | 84.2 | 84.0–84.4 | 672 | 5,024,564 | 10,467,647.46 |
-| adaptive_throughput | crisis | standard | 2 | 2 | 67.6 | 67.4–67.7 | 672 | 4,038,282 | 11,166,026.88 |
-| adaptive_throughput | peak | standard | 2 | 0 | 70.0 | 69.9–70.0 | 648 | 6,593,856 | 12,288,754.03 |
-| adaptive_throughput | breakdown | standard | 2 | 2 | 84.5 | 84.4–84.6 | 672 | 5,024,564 | 10,890,140.36 |
+| baseline | stable | standard | 2 | 0 | 61.8 | 61.8–61.9 | 8736 | 58,500,000 | 133,910,911.72 |
+| baseline | crisis | standard | 2 | 0 | 57.3 | 57.2–57.4 | 8736 | 39,000,000 | 187,649,791.71 |
+| baseline | peak | standard | 2 | 0 | 60.7 | 60.6–60.7 | 8736 | 58,500,000 | 118,958,188.75 |
+| baseline | breakdown | standard | 2 | 0 | 61.0 | 61.0–61.1 | 8736 | 48,100,000 | 162,583,607.71 |
+| hands_off | stable | standard | 2 | 2 | 67.2 | 66.8–67.5 | 8736 | 73,304,748 | 91,357,557.78 |
+| hands_off | crisis | standard | 2 | 0 | 57.3 | 57.2–57.4 | 8736 | 39,000,000 | 187,649,791.71 |
+| hands_off | peak | standard | 2 | 2 | 67.3 | 66.6–68.0 | 8736 | 70,610,756 | 78,626,625.12 |
+| hands_off | breakdown | standard | 2 | 0 | 62.3 | 62.3–62.4 | 8736 | 52,000,000 | 151,857,878.40 |
+| cost_conscious | stable | standard | 2 | 0 | 60.7 | 60.7–60.7 | 8736 | 52,000,000 | 151,764,071.71 |
+| cost_conscious | crisis | standard | 2 | 0 | 57.3 | 57.2–57.4 | 8736 | 39,000,000 | 187,649,791.71 |
+| cost_conscious | peak | standard | 2 | 0 | 60.6 | 60.6–60.6 | 8736 | 52,000,000 | 136,811,348.75 |
+| cost_conscious | breakdown | standard | 2 | 0 | 60.6 | 60.6–60.6 | 8736 | 46,800,000 | 166,130,319.71 |
+| adaptive_throughput | stable | standard | 2 | 2 | 83.4 | 82.5–84.3 | 8736 | 75,370,340 | 87,714,420.09 |
+| adaptive_throughput | crisis | standard | 2 | 0 | 57.3 | 57.2–57.4 | 8736 | 39,000,000 | 187,649,791.71 |
+| adaptive_throughput | peak | standard | 2 | 2 | 73.8 | 72.7–75.0 | 8736 | 71,565,351 | 73,652,284.57 |
+| adaptive_throughput | breakdown | standard | 2 | 0 | 62.9 | 62.7–63.0 | 8736 | 54,166,322 | 147,310,891.40 |
 
 ## Players
 
-- **baseline**: Original demonstration player: fixed dispatch targets and small queue-based labor transfers.
-- **hands_off**: Keeps the existing operating plan with no new decisions or investments.
-- **cost_conscious**: Uses value freight, regular labor, and queue-based allocation without overtime or investment.
-- **adaptive_throughput**: Uses the available roster, queue-based allocation, and pressure-triggered overtime and faster freight.
+- **baseline**: Plans 750,000 Indianapolis units and 375,000 East Coast units each week.
+- **hands_off**: Retains the initial weekly targets (1,000,000 Indianapolis and the seasonal East Coast default).
+- **cost_conscious**: Plans 650,000 Indianapolis units and 350,000 East Coast units each week.
+- **adaptive_throughput**: Plans forecast removals plus one quarter of site backlog, up to each site maximum.
 
-Results include full score components, costs, remaining freight, and seeds in the accompanying JSON. Wins use the engine’s target score and terminal rules. A backlog loss takes precedence over the score: a peak-season episode can lose even with a score at or above 60. Early losses may have fewer hours, processed units, and costs.
+Results include full score components, costs, remaining freight, and seeds in the accompanying JSON. Wins use the engine’s target score and terminal rules. Backlog is assessed at the end of the 52-week campaign: a peak-season episode can lose even with a score at or above 60. The year continues despite midyear backlog warnings.

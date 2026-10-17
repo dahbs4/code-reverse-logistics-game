@@ -52,6 +52,8 @@ def new_game(scenario='stable', seed=42, difficulty='standard', name='National r
     s['removal_baseline']=initialize_forecast(c,sc['start_date'],difficulty)
     s['removal_actuals']=[0]*len(s['removal_baseline'])
     s['site_processed']={site:0 for site in s['plans']}
+    from .weekly import defaults
+    s['weekly_plan']=defaults(s)
     s['rng']=r.getstate()
     snapshot(s,0)
     invariant(s)
@@ -262,6 +264,8 @@ def snapshot(s,throughput):
 
 def observe(s):
     c=s['config']; inv=inventory(s);sc=scorecard(s)
+    from .weekly import defaults, outlook
+    weekly=outlook(s)
     sites={}
     for site,cfg in c['sites'].items():
         q=inventory(s,site);daily=max(1,c['weekly_units']/7*cfg['share']*seasonal(s))
@@ -276,7 +280,7 @@ def observe(s):
     return dict(name=s['name'],seed=s['seed'],scenario=s['scenario'],hour=s['hour'],date=date(s).isoformat(),inventory=inv,sites=sites,
         generated=s['generated'],initial=s['initial'],disposed=s['disposed'],costs=s['costs'],revenue=s['revenue'],dispositions=s['dispositions'],totals=s['totals'],
         score=sc,reward=sc['overall']/100,terminal=terminal(s),history=s['history'],events=s['events'][-100:],decisions=s['decisions'][-100:],loads=s['loads'],
-        forecasts=forecasts,annual_forecast=annual_forecast(s),routing=s['routing'],store_count=c['store_count'],dc_count=c['dc_count'],demand_override=s['demand_override'],
+        weekly_plan=s.get('weekly_plan',defaults(s)),weekly_outlook=weekly,last_week=s.get('last_week'),forecasts=forecasts,annual_forecast=annual_forecast(s),routing=s['routing'],store_count=c['store_count'],dc_count=c['dc_count'],demand_override=s['demand_override'],
         origins={dc:{k:sum(x['units'] for x in s['lots'] if x['origin']==dc and x['state']==k) for k in STATES} for dc in s['routing']},
         available_actions=dict(sites='Staffing, overtime, temporary labor, dispatch, appointments, holds, carrier, expedite, supplemental capacity, priority, equipment investment',routing='DC-to-return-center assignment',demand_override='Planning forecast only'),
         constraints=dict(trailer_units=c['trailer_units'],investment_cost=c['equipment_cost'],horizon_days=c['horizon_days'],success_score=c['success_score']),score_rules=dict(weights=c['score_weights'],targets=c['score_targets']))

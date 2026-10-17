@@ -1,3 +1,5 @@
+> Historical: this report predates weekly-only planning. See [weekly model validation](weekly-validation.md) for the current game.
+
 # Annual campaign update
 
 New games last 52 operating weeks (364 days / 8,736 hours). Backlog warnings do

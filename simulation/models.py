@@ -29,9 +29,15 @@ class NewGame(BaseModel):
     difficulty: Literal['standard','hard'] = 'standard'
     name: str = Field(default='National recovery plan', min_length=1, max_length=80)
 
+class WeeklyPlan(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    IND: int = Field(ge=0, le=1000000)
+    EAST: int = Field(ge=0, le=500000)
+
 class StepRequest(BaseModel):
-    hours: Literal[8,24,168] = 24
-    action: Action | None = None
+    model_config = ConfigDict(extra="forbid")
+    hours: Literal[168] = 168
+    action: WeeklyPlan | None = None
 
 class SiteObservation(BaseModel):
     name: str

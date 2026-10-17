@@ -13,8 +13,9 @@ import time
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from simulation.engine import SCENARIOS, advance, apply_action, invariant, new_game, observe, terminal
+from simulation.engine import SCENARIOS, invariant, new_game, observe, terminal
 from simulation.players import DESCRIPTIONS, PLAYERS
+from simulation.weekly import commit, advance_week
 
 
 def run_episode(player, scenario, seed, difficulty, trace_dir=None):
@@ -31,8 +32,8 @@ def run_episode(player, scenario, seed, difficulty, trace_dir=None):
         while not terminal(state)['done']:
             observation = observe(state)
             action = PLAYERS[player](observation)
-            apply_action(state, action)
-            advance(state, 24)
+            commit(state, action)
+            advance_week(state)
             invariant(state)
             turns += 1
             if trace:
@@ -58,7 +59,7 @@ def run_episode(player, scenario, seed, difficulty, trace_dir=None):
 def report(results):
     lines = ['# Simulated player tournament', '',
         'Deterministic rule-based players use the same actions and engine as human players. '
-        'Each turn advances up to 24 hours; engine invariants run every simulated hour. '
+        'Each turn executes one weekly unit plan; conservation is checked after each week. '
         'These seeded episodes compare strategies; they do not establish optimal play.', '',
         f'Episodes: {len(results)}. All terminal states reached; freight conservation balance is zero in every episode.', '',
         '| Player | Scenario | Difficulty | Runs | Wins | Mean score | Score range | Mean hours | Mean processed | Mean cost |',

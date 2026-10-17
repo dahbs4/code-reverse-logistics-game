@@ -3,7 +3,8 @@ import copy
 
 import pytest
 
-from simulation.engine import advance, apply_action, invariant, new_game, observe
+from simulation.engine import invariant, new_game, observe
+from simulation.weekly import commit, advance_week
 from simulation.players import PLAYERS
 
 
@@ -17,7 +18,7 @@ def test_players_are_deterministic_valid_and_preserve_observations(player, scena
         action = PLAYERS[player](observation)
         assert observation == original
         assert action == PLAYERS[player](copy.deepcopy(observation))
-        apply_action(state, action)
-        advance(state, 24)
+        commit(state, action)
+        advance_week(state)
         invariant(state)
-    assert state['hour'] == 72
+    assert state['hour'] == 504
