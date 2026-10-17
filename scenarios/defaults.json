@@ -3,7 +3,7 @@
   "trailer_units": 2400,
   "dc_count": 35,
   "store_count": 2000,
-  "horizon_days": 28,
+  "horizon_days": 364,
   "category_mix": {
     "Store Salvage": 0.62,
     "DC Salvage": 0.22,
@@ -96,7 +96,9 @@
       "max_workers": 330,
       "upstream_days": 10,
       "yard_days": 2,
-      "trailers": 270
+      "trailers": 270,
+      "weekly_throughput": 1000000,
+      "max_weekly_throughput": 1000000
     },
     "EAST": {
       "name": "East Coast \u00b7 DC region",
@@ -112,7 +114,10 @@
       "max_workers": 200,
       "upstream_days": 8,
       "yard_days": 2,
-      "trailers": 150
+      "trailers": 150,
+      "weekly_throughput": 450000,
+      "summer_weekly_throughput": 420000,
+      "max_weekly_throughput": 500000
     }
   },
   "score_weights": {

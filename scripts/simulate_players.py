@@ -78,9 +78,9 @@ def report(results):
     for player in dict.fromkeys(r['player'] for r in results):
         lines.append(f'- **{player}**: {DESCRIPTIONS[player]}')
     lines.extend(['', 'Results include full score components, costs, remaining freight, and seeds in the accompanying JSON. '
-                  'Wins use the engine’s target score and terminal rules. A backlog loss takes precedence over the score: '
+                  'Wins use the engine’s target score and terminal rules. Backlog is assessed at the end of the 52-week campaign: '
                   'a peak-season episode can lose even with a score at or above 60. '
-                  'Early losses may have fewer hours, processed units, and costs.', ''])
+                  'The year continues despite midyear backlog warnings.', ''])
     return '\n'.join(lines)
 
 

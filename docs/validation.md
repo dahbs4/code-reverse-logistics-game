@@ -1,3 +1,5 @@
+> Historical reference: this document describes the previous 28-day game. Current new campaigns last 52 weeks and enforce physical site throughput limits.
+
 # Validation report
 
 Validated in the cloud workspace on October 16, 2026, with Python 3.12.14, Node 24.19.0, npm 11.9.0, and system Chromium through Playwright.

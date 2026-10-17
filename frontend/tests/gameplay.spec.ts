@@ -1,4 +1,5 @@
 import { test,expect } from '@playwright/test'
+test.setTimeout(600000)
 test('complete planning, execution, persistence, and scenario gameplay',async({page})=>{
  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message))
  await page.goto('/');await page.getByRole('button',{name:'Scenarios',exact:true}).click()
@@ -17,10 +18,10 @@ test('complete planning, execution, persistence, and scenario gameplay',async({p
  await page.getByRole('button',{name:'Save checkpoint',exact:true}).click()
  await expect(page.getByRole('status')).toContainText('Checkpoint saved')
  await page.getByRole('button',{name:'Advance',exact:true}).click()
- await expect(page.getByText('Day 2',{exact:true})).toBeVisible()
+ await expect(page.locator('.sim-clock strong')).toContainText('Day 2')
  await page.getByRole('button',{name:'Restore checkpoint',exact:true}).click()
- await expect(page.getByText('Day 1',{exact:true})).toBeVisible()
- await page.reload();await expect(page.getByText('Day 1',{exact:true})).toBeVisible()
+ await expect(page.locator('.sim-clock strong')).toContainText('Day 1')
+ await page.reload();await expect(page.locator('.sim-clock strong')).toContainText('Day 1')
  await page.getByRole('button',{name:'Network map',exact:true}).click()
  await page.locator('[data-id="DC-01"]').click();await expect(page.getByText('S-0001',{exact:true})).toBeVisible()
  await page.getByRole('button',{name:'Decision history',exact:true}).click()
@@ -28,9 +29,9 @@ test('complete planning, execution, persistence, and scenario gameplay',async({p
  await page.getByRole('button',{name:'Financials',exact:true}).click()
  await expect(page.getByRole('heading',{name:'Transparent performance scorecard'})).toBeVisible()
  await page.getByLabel('Advance interval').selectOption('168')
- for(let i=0;i<4;i++){
+ for(let i=0;i<52;i++){
   await page.getByRole('button',{name:'Advance',exact:true}).click()
-  if(i<3)await expect(page.getByText(`Day ${(i+1)*7+1}`,{exact:true})).toBeVisible({timeout:90000})
+  if(i<51)await expect(page.locator('.sim-clock strong')).toContainText(`Day ${(i+1)*7+1}`,{timeout:90000})
  }
  await expect(page.locator('.completion')).toBeVisible({timeout:90000})
  await expect(page.getByRole('button',{name:'Advance',exact:true})).toBeDisabled()

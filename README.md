@@ -29,7 +29,7 @@ Dependencies and frontend lockfile are included. Setup uses `npm ci`; npm's cach
 5. **Advance** one shift (8h), one day (24h), or one week (168h). Every hour is executed. Watch inventory accumulate behind bottlenecks, shipments move, disruptions clear, and recovery value accrue.
 6. Use forecasts to prepare for seasonal surges. A demand override changes your forecast assumption only; it cannot remove actual freight.
 7. Progress autosaves after commands. **Save checkpoint** captures an explicit recovery point. **Restore checkpoint** restores its complete state, including random state. Load existing games from Scenarios. Start a fresh game with the same seed to replay.
-8. Finish 28 days at or above 60 points to win. Excessive network inventory (over 40 seasonal demand-days) ends a game early. The final banner reports your outcome; Financials explains score weights, formulas, and targets.
+8. Finish 52 weeks at or above 60 points to win. Excessive network inventory (over 40 seasonal demand-days) raises a warning during play and causes a loss at the final annual assessment. The final banner reports your outcome; Financials explains score weights, formulas, and targets.
 
 ### Four challenges
 
@@ -38,7 +38,7 @@ Dependencies and frontend lockfile are included. Setup uses `npm ci`; npm's cach
 - **Peak Season:** December demand doubles, rising to 4.455 million weekly during Christmas and the following week.
 - **Facility Breakdown:** Indianapolis processing equipment starts at 55% effectiveness.
 
-Each challenge runs for 28 days. Hard difficulty adds 10% actual demand. All scenarios use the same explicit score target and failure criteria, allowing deterministic comparisons. The baseline controller is a demonstration, not an optimal player and is not guaranteed to win.
+Each challenge runs for 52 weeks (364 days). Hard difficulty adds 10% actual demand. All scenarios use the same explicit score target and failure criteria, allowing deterministic comparisons. The baseline controller is a demonstration, not an optimal player and is not guaranteed to win.
 
 ## Simulation
 
@@ -93,15 +93,40 @@ npm --prefix frontend run e2e
 .venv/bin/python -m simulation.agent --scenario crisis --seed 42 --output /tmp/episode.jsonl
 ```
 
-Playwright uses system Chromium at `/usr/bin/chromium`; set `CHROMIUM_PATH` for a different installation. On a machine without a browser, install Chromium with the OS package manager, or run `npx playwright install chromium` in `frontend/` and adjust the executable path. Browser tests cover plan changes, preview and commit, time advance, checkpoint save/restore, reload, map inspection, history, finances, a full 28-day scenario, terminal controls, and tablet layout. They save screenshots in `/tmp/reverse-*.png` and retain traces on failure.
+Playwright uses system Chromium at `/usr/bin/chromium`; set `CHROMIUM_PATH` for a different installation. On a machine without a browser, install Chromium with the OS package manager, or run `npx playwright install chromium` in `frontend/` and adjust the executable path. Browser tests cover plan changes, preview and commit, time advance, checkpoint save/restore, reload, map inspection, history, finances, a full 52-week scenario, terminal controls, and tablet layout. They save screenshots in `/tmp/reverse-*.png` and retain traces on failure.
 
 The API offers structured observation (`GET /api/games/{id}`), validated action, planning preview, and step endpoints. Observations expose constraints, forecasts, available actions, score, reward (overall / 100), and termination. `step` accepts an optional action so external agents can use one action/transition interface. `simulation/agent.py` uses the same action validation as humans. JSONL episodes include seed, observation, action space, chosen action, next observation, reward, and terminal outcome. No LLM or training is required.
+
+## Annual planning and instructions
+
+New scenarios last 52 operating weeks (364 days) from their start date. The in-game
+**Instructions** page explains the operating cycle, physical site limits, forecasting,
+and the final assessment. Existing saves keep their original horizon; start a new
+scenario for the annual campaign and removal actuals ledger.
+
+East Coast normally operates at 450,000 units/week, falling to 420,000 in June and
+July as non-conveyable freight increases. Overtime can lift that operating limit to
+a hard ceiling of 500,000. Indianapolis has a hard ceiling of 1,000,000 units/week.
+These unit limits are enforced hourly in addition to labor effort, equipment, and
+transport constraints, with no unused capacity carried forward. Weeks crossing
+month boundaries use each hour's applicable seasonal limit.
+
+**Forecast & planning** shows all 52 weeks, original forecasts, completed removal
+actuals, and the revised annual outlook. Removals mean new freight generated at
+origins, excluding initial inventory. After each complete week, the last four
+completed weeks' actual/baseline ratio (bounded to 0.5–2.0) revises future forecasts.
+Baseline includes difficulty, seasonal demand, holiday surges, and monthly DC removal
+pulses. Partial-week actuals do not revise future weeks. The planning multiplier
+changes forecast assumptions only. Save/restore preserves the entire weekly ledger.
+
+Historical validation reports below describe the earlier 28-day rules and are not
+annual campaign results.
 
 See [architecture](docs/architecture.md), [validation report](docs/validation.md), and [complete scenario results](docs/validation-results.json).
 
 ## Release scope and next improvements
 
-This first playable release implements the full planning/execution/evaluation loop, four scenarios, persistence, all eight navigation areas, a baseline agent, and automated validation. It uses aggregate store demand, synthetic regional positions, fixed category high-value proportions, and a daily roster translated into hourly effective capacity. Individual store IDs are inspectable; individual store transactions and SKU histories are not generated. The transportation page exposes automated tender/retry strategies and a recent arrival ledger rather than a manual per-load tender workflow. Forecasts are analytical demand/capacity estimates; preview is a seeded simulation comparison.
+This first playable release implements the full planning/execution/evaluation loop, four scenarios, persistence, all nine navigation areas, a baseline agent, and automated validation. It uses aggregate store demand, synthetic regional positions, fixed category high-value proportions, and a daily roster translated into hourly effective capacity. Individual store IDs are inspectable; individual store transactions and SKU histories are not generated. The transportation page exposes automated tender/retry strategies and a recent arrival ledger rather than a manual per-load tender workflow. Forecasts are analytical demand/capacity estimates; preview is a seeded simulation comparison.
 
 Further work: configurable shift calendars and breaks per worker, equipment lead times and capital budgets, carrier contract negotiation, parcel-specific networks and SKU-level processing, detailed site-by-site throughput time series, per-store transaction drilldown, forecast error tracking, user-created scenario files in the UI, side-by-side saved-run comparisons, modular frontend page files, database migrations, and deployment authentication. These are not represented as completed functionality. PostgreSQL support follows SQLAlchemy conventions but has not been integration tested.
 

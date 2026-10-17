@@ -1,3 +1,5 @@
+> Historical reference: this document describes the previous 28-day game. Current new campaigns last 52 weeks and enforce physical site throughput limits.
+
 # Simulated player tournament
 
 Deterministic rule-based players use the same actions and engine as human players. Each turn advances up to 24 hours; engine invariants run every simulated hour. These seeded episodes compare strategies; they do not establish optimal play.

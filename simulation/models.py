@@ -44,6 +44,8 @@ class SiteObservation(BaseModel):
     yard_days: float
     utilization: float
     equipment: float
+    weekly_throughput: dict[str, int]
+    processed: int
 
 class Observation(BaseModel):
     model_config = ConfigDict(extra='allow')

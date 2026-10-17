@@ -1,6 +1,42 @@
 [
- {"id":"stable","name":"Stable Operations","subtitle":"Find your operating rhythm","description":"Balance a mature network, protect service, and finish 28 days above 60 points.","start_date":"2026-09-01","acceptance_factor":1,"equipment_factor":1,"appointment_factor":1},
- {"id":"crisis","name":"Transportation Crisis","subtitle":"Break the upstream gridlock","description":"Carrier acceptance falls to 50% of normal and appointment slots tighten. Recover with premium transport and measured releases.","start_date":"2026-09-01","acceptance_factor":0.5,"equipment_factor":1,"appointment_factor":0.65},
- {"id":"peak","name":"Peak Season","subtitle":"Prepare for the holiday wave","description":"Start December 12. Demand doubles, then reaches 4.45 million weekly during Christmas and the following week.","start_date":"2026-12-12","acceptance_factor":1,"equipment_factor":1,"appointment_factor":1},
- {"id":"breakdown","name":"Facility Breakdown","subtitle":"Keep the network moving","description":"Indianapolis processing equipment operates at 55%. Rebalance routing and invest while protecting East Coast capacity.","start_date":"2026-09-01","acceptance_factor":1,"equipment_factor":0.55,"appointment_factor":1}
+  {
+    "id": "stable",
+    "name": "Stable Operations",
+    "subtitle": "Find your operating rhythm",
+    "description": "Balance a mature network, protect service, and finish 52 weeks above 60 points.",
+    "start_date": "2026-09-01",
+    "acceptance_factor": 1,
+    "equipment_factor": 1,
+    "appointment_factor": 1
+  },
+  {
+    "id": "crisis",
+    "name": "Transportation Crisis",
+    "subtitle": "Break the upstream gridlock",
+    "description": "Carrier acceptance falls to 50% of normal and appointment slots tighten. Recover with premium transport and measured releases.",
+    "start_date": "2026-09-01",
+    "acceptance_factor": 0.5,
+    "equipment_factor": 1,
+    "appointment_factor": 0.65
+  },
+  {
+    "id": "peak",
+    "name": "Peak Season",
+    "subtitle": "Prepare for the holiday wave",
+    "description": "Start December 12. Demand doubles, then reaches 4.45 million weekly during Christmas and the following week.",
+    "start_date": "2026-12-12",
+    "acceptance_factor": 1,
+    "equipment_factor": 1,
+    "appointment_factor": 1
+  },
+  {
+    "id": "breakdown",
+    "name": "Facility Breakdown",
+    "subtitle": "Keep the network moving",
+    "description": "Indianapolis processing equipment operates at 55%. Rebalance routing and invest while protecting East Coast capacity.",
+    "start_date": "2026-09-01",
+    "acceptance_factor": 1,
+    "equipment_factor": 0.55,
+    "appointment_factor": 1
+  }
 ]

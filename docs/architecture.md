@@ -1,3 +1,5 @@
+> Historical reference: this document describes the previous 28-day game. Current new campaigns last 52 weeks and enforce physical site throughput limits.
+
 # Architecture and assumptions
 
 A seeded hourly discrete-time engine owns all operational calculations. Freight is represented as aggregate, category-specific lots, with origin and generation hour retained. Every hour executes demand → tenders → responses/pickups → transit → appointments → receiving → staging → processing. Separate inventory states and capacity budgets prevent one department from bypassing another. Each state is JSON serializable, including the random generator state. APIs and the baseline agent use the same validated action model.

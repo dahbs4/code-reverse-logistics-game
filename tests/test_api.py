@@ -30,3 +30,15 @@ def test_validation_and_not_found():
     p={**g['sites']['EAST']['plan'],'receiving':200,'processing':300}
     assert client.post(f'/api/games/{id}/action',json={'sites':{'EAST':p}}).status_code==422
     assert client.get(f'/api/games/{id}').json()['decisions']==[]
+
+def test_annual_forecast_contract_and_checkpoint():
+    g=client.post('/api/games',json={'seed':137}).json();id=g['id']
+    assert g['constraints']['horizon_days']==364
+    assert len(g['annual_forecast']['weeks'])==52
+    assert g['sites']['EAST']['weekly_throughput']==dict(normal=450000,operating=450000,maximum=500000)
+    assert g['sites']['IND']['weekly_throughput']['maximum']==1000000
+    stepped=client.post(f'/api/games/{id}/step',json={'hours':168}).json()
+    forecast=stepped['annual_forecast']
+    assert forecast['completed_weeks']==1
+    assert forecast['weeks'][0]['actual']==stepped['generated']
+    assert client.post(f'/api/games/{id}/restore',json={}).json()['annual_forecast']==g['annual_forecast']
