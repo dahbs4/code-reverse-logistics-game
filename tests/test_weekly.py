@@ -8,6 +8,19 @@ from simulation.models import StepRequest
 from simulation.weekly import advance_week, commit, outlook
 
 
+def test_indianapolis_typical_rate_is_separate_from_maximum():
+    state = new_game()
+    assert state['weekly_plan']['IND'] == 600000
+    site = outlook(state)['next_week']['sites']['IND']
+    assert site['normal'] == 600000
+    assert site['maximum'] == 1000000
+    commit(state, {'IND': 1000000, 'EAST': 450000})
+    assert outlook(state)['next_week']['sites']['IND']['projected_processed'] == 1000000
+    # Older saves retain explicit targets, but receive the corrected typical label.
+    del state['config']['sites']['IND']['typical_weekly_throughput']
+    assert outlook(state)['next_week']['sites']['IND']['normal'] == 600000
+
+
 def test_weekly_outlook_is_pure_and_conserves_projected_units():
     state = new_game()
     before = copy.deepcopy(state)

@@ -98,7 +98,8 @@
       "yard_days": 2,
       "trailers": 270,
       "weekly_throughput": 1000000,
-      "max_weekly_throughput": 1000000
+      "max_weekly_throughput": 1000000,
+      "typical_weekly_throughput": 600000
     },
     "EAST": {
       "name": "East Coast \u00b7 DC region",

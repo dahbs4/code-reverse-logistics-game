@@ -25,7 +25,7 @@ PLAYERS = {'baseline': baseline, 'hands_off': hands_off,
            'cost_conscious': cost_conscious, 'adaptive_throughput': adaptive_throughput}
 DESCRIPTIONS = {
     'baseline': 'Plans 750,000 Indianapolis units and 375,000 East Coast units each week.',
-    'hands_off': 'Retains the initial weekly targets (1,000,000 Indianapolis and the seasonal East Coast default).',
+    'hands_off': 'Retains the initial weekly targets (600,000 Indianapolis and the seasonal East Coast default).',
     'cost_conscious': 'Plans 650,000 Indianapolis units and 350,000 East Coast units each week.',
     'adaptive_throughput': 'Plans forecast removals plus one quarter of site backlog, up to each site maximum.',
 }

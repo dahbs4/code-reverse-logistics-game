@@ -39,7 +39,7 @@ or equipment controls. **Instructions** explains the weekly model inside the app
 
 | Site | Typical units/week | June–July typical | Maximum units/week |
 | --- | ---: | ---: | ---: |
-| Indianapolis | 1,000,000 | 1,000,000 | 1,000,000 |
+| Indianapolis | 600,000 | 600,000 | 1,000,000 |
 | East Coast | 450,000 | 420,000 | 500,000 |
 
 East Coast targets above the typical rate automatically incur a surge labor

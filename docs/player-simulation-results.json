@@ -342,22 +342,22 @@
     "difficulty": "standard",
     "hour": 8736,
     "turns": 52,
-    "outcome": "won",
+    "outcome": "lost",
     "score": {
-      "service": 35.6,
+      "service": 11.6,
       "finance": 100,
-      "backlog": 3.6,
+      "backlog": 0,
       "transport": 100,
-      "labor": 96.9,
+      "labor": 99.9,
       "recovery": 100,
       "stability": 100,
-      "overall": 67.5
+      "overall": 62.3
     },
     "initial": 1856548,
     "generated": 73681594,
-    "processed": 73113929,
+    "processed": 54600000,
     "inventory": {
-      "upstream": 2424213,
+      "upstream": 20938142,
       "tender": 0,
       "pickup": 0,
       "transit": 0,
@@ -365,16 +365,16 @@
       "receiving": 0,
       "staging": 0
     },
-    "remaining": 2424213,
+    "remaining": 20938142,
     "costs": {
-      "transport": 35086500,
-      "labor": 19021319.76864,
+      "transport": 26192400,
+      "labor": 14204736.0,
       "overtime": 34006.68432000001,
-      "storage": 36408091.440000005,
+      "storage": 103152119.48159999,
       "investment": 0
     },
-    "total_cost": 90549917.89,
-    "revenue": 408236433.76,
+    "total_cost": 143583262.17,
+    "revenue": 304619395.63,
     "conservation_balance": 0
   },
   {
@@ -384,22 +384,22 @@
     "difficulty": "standard",
     "hour": 8736,
     "turns": 52,
-    "outcome": "won",
+    "outcome": "lost",
     "score": {
-      "service": 35.2,
+      "service": 11.4,
       "finance": 100,
       "backlog": 0,
       "transport": 100,
-      "labor": 97.5,
+      "labor": 99.9,
       "recovery": 100,
       "stability": 100,
-      "overall": 66.8
+      "overall": 62.3
     },
     "initial": 1856548,
     "generated": 74262347,
-    "processed": 73495566,
+    "processed": 54600000,
     "inventory": {
-      "upstream": 2623329,
+      "upstream": 21518895,
       "tender": 0,
       "pickup": 0,
       "transit": 0,
@@ -407,16 +407,16 @@
       "receiving": 0,
       "staging": 0
     },
-    "remaining": 2623329,
+    "remaining": 21518895,
     "costs": {
-      "transport": 35268200,
-      "labor": 19120606.450560004,
+      "transport": 26192400,
+      "labor": 14204736.0,
       "overtime": 34006.68432000001,
-      "storage": 37742384.53440001,
+      "storage": 105275303.952,
       "investment": 0
     },
-    "total_cost": 92165197.67,
-    "revenue": 410364485.77,
+    "total_cost": 145706446.64,
+    "revenue": 304870555.33,
     "conservation_balance": 0
   },
   {
@@ -510,22 +510,22 @@
     "difficulty": "standard",
     "hour": 8736,
     "turns": 52,
-    "outcome": "won",
+    "outcome": "lost",
     "score": {
-      "service": 38.7,
+      "service": 4.6,
       "finance": 100,
-      "backlog": 4.9,
+      "backlog": 0,
       "transport": 100,
-      "labor": 93.3,
+      "labor": 99.8,
       "recovery": 100,
       "stability": 100,
-      "overall": 68.0
+      "overall": 60.9
     },
     "initial": 1856548,
     "generated": 73368252,
-    "processed": 70444334,
+    "processed": 54600000,
     "inventory": {
-      "upstream": 4780466,
+      "upstream": 20624800,
       "tender": 0,
       "pickup": 0,
       "transit": 0,
@@ -533,16 +533,16 @@
       "receiving": 0,
       "staging": 0
     },
-    "remaining": 4780466,
+    "remaining": 20624800,
     "costs": {
-      "transport": 33810000,
-      "labor": 18326797.93344,
+      "transport": 26192400,
+      "labor": 14204736.0,
       "overtime": 34006.68432,
-      "storage": 25276764.576000005,
+      "storage": 87743516.58240005,
       "investment": 0
     },
-    "total_cost": 77447569.19,
-    "revenue": 393038475.78,
+    "total_cost": 128174659.27,
+    "revenue": 304520629.23,
     "conservation_balance": 0
   },
   {
@@ -552,22 +552,22 @@
     "difficulty": "standard",
     "hour": 8736,
     "turns": 52,
-    "outcome": "won",
+    "outcome": "lost",
     "score": {
-      "service": 35.9,
+      "service": 3.4,
       "finance": 100,
       "backlog": 0,
       "transport": 100,
-      "labor": 93.8,
+      "labor": 99.9,
       "recovery": 100,
       "stability": 100,
-      "overall": 66.6
+      "overall": 60.7
     },
     "initial": 1856548,
     "generated": 74225468,
-    "processed": 70777177,
+    "processed": 54600000,
     "inventory": {
-      "upstream": 5304839,
+      "upstream": 21482016,
       "tender": 0,
       "pickup": 0,
       "transit": 0,
@@ -575,16 +575,16 @@
       "receiving": 0,
       "staging": 0
     },
-    "remaining": 5304839,
+    "remaining": 21482016,
     "costs": {
-      "transport": 33968700,
-      "labor": 18413390.36832,
+      "transport": 26192400,
+      "labor": 14204736.0,
       "overtime": 34006.68432,
-      "storage": 27389583.983999997,
+      "storage": 90778460.9088,
       "investment": 0
     },
-    "total_cost": 79805681.04,
-    "revenue": 395202095.19,
+    "total_cost": 131209603.59,
+    "revenue": 304877261.21,
     "conservation_balance": 0
   },
   {

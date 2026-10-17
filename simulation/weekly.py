@@ -8,7 +8,7 @@ from .models import WeeklyPlan
 
 def defaults(state):
     month = datetime.fromisoformat(state['scenario']['start_date']).month
-    return {'IND': 1000000, 'EAST': 420000 if month in (6, 7) else 450000}
+    return {'IND': state['config']['sites']['IND'].get('typical_weekly_throughput', 600000), 'EAST': 420000 if month in (6, 7) else 450000}
 
 
 def limits(state, first_hour, hours=168):
@@ -18,7 +18,12 @@ def limits(state, first_hour, hours=168):
         normal = 0
         for hour in range(first_hour, first_hour + hours):
             month = (datetime.fromisoformat(state['scenario']['start_date']) + timedelta(hours=hour)).month
-            normal += cfg.get('summer_weekly_throughput', 420000) if site == 'EAST' and month in (6, 7) else cfg.get('weekly_throughput', 1000000 if site == 'IND' else 450000)
+            if site == 'IND':
+                normal += cfg.get('typical_weekly_throughput', 600000)
+            elif month in (6, 7):
+                normal += cfg.get('summer_weekly_throughput', 420000)
+            else:
+                normal += cfg.get('weekly_throughput', 450000)
         maximum = cfg.get('max_weekly_throughput', 1000000 if site == 'IND' else 500000)
         factor = state['scenario']['acceptance_factor']
         if site == 'IND':
@@ -159,7 +164,7 @@ def advance_week(state):
         # Automatically sized regular labor; surge above the usual rate has an overtime premium.
         labor = processed * config['labor_rate'] * weighted_effort / config['productivity']['processing']
         state['costs']['labor'] += labor
-        state['costs']['overtime'] += max(0, processed - capacities[site]['normal']) * config['labor_rate'] * weighted_effort / config['productivity']['processing'] * (config['overtime_multiplier'] - 1)
+        state['costs']['overtime'] += (max(0, processed - capacities[site]['normal']) if site == 'EAST' else 0) * config['labor_rate'] * weighted_effort / config['productivity']['processing'] * (config['overtime_multiplier'] - 1)
     state['lots'] = [x for x in state['lots'] if x['units'] > 0]
     state['costs']['storage'] += (starting_inventory + sum(inventory(state).values())) / 2 * hours * config['storage_unit_hour']
     state['rng'] = random.getstate()
